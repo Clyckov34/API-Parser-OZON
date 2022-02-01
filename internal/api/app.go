@@ -6,11 +6,11 @@ import (
 )
 
 func Run(fl *AppFlag) {
-	var client Client = &Headers{
-		ApiKey:   fl.Header.ApiKey,
-		ClientId: fl.Header.ClientId,
-		URL:      fl.Header.URL,
-		Method:   fl.Header.Method,
+	var client New = &HTTPHeader{
+		ApiKey:   fl.HTTPHeader.ApiKey,
+		ClientId: fl.HTTPHeader.ClientId,
+		URL:      fl.HTTPHeader.URL,
+		Method:   fl.HTTPHeader.Method,
 	}
 
 	body, err := client.RequestClient()
@@ -23,15 +23,16 @@ func Run(fl *AppFlag) {
 		log.Fatalln(err)
 	}
 
-	dataGoods := &DataCategories
 	client.ConvertData(*response)
+	data := client.CategoriesGoods()
 
-	if fl.ExpFile == true {
-		client.CreateJsonFile(*dataGoods)
-	}
-
-	for k, v := range *dataGoods {
+	for k, v := range data {
 		fmt.Printf("%v) %v - %v - %v\n", k+1, v.Id, v.Name, v.Parents)
 	}
 
+	if fl.ExpFile {
+		if err := client.CreateJsonFile(data); err != nil {
+			log.Println(err)
+		}
+	}
 }

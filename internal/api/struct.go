@@ -5,35 +5,36 @@ import (
 )
 
 //Client
-type Client interface {
+type New interface {
 	RequestClient() (*http.Response, error)
 	DecoderBodyJson(response *http.Response) (*CategoryModel, error)
 	ConvertData(data CategoryModel)
+	CategoriesGoods() Categories
 	CreateJsonFile(data Categories) error
 }
 
 //AppFlag параметры запуска приложения
 type AppFlag struct {
-	ExpFile bool
-	Header  Headers
+	ExpFile    bool
+	HTTPHeader HTTPHeader
 }
 
 //Headers загаловок идентификация пользователя
-type Headers struct {
+type HTTPHeader struct {
 	ClientId string
 	ApiKey   string
 	URL      string
 	Method   string
 }
 
+type CategoryModel struct {
+	Result []CategoryBaseModel `json:"result"`
+}
+
 type CategoryBaseModel struct {
 	Name     string              `json:"title"`
 	Id       int                 `json:"category_id"`
 	Children []CategoryBaseModel `json:"children"`
-}
-
-type CategoryModel struct {
-	Result []CategoryBaseModel `json:"result"`
 }
 
 type Categories []Category

@@ -6,7 +6,7 @@ import (
 )
 
 //request запрос в api
-func (m *Headers) request() (*http.Request, error) {
+func (m *HTTPHeader) request() (*http.Request, error) {
 	req, err := http.NewRequest(m.Method, m.URL, nil)
 	if err != nil {
 		return nil, errors.New("ошибка запроса: " + err.Error())
@@ -15,7 +15,7 @@ func (m *Headers) request() (*http.Request, error) {
 }
 
 //clientHeader запрос с параметрами header
-func (m *Headers) RequestClient() (*http.Response, error) {
+func (m *HTTPHeader) RequestClient() (*http.Response, error) {
 	req, err := m.request()
 	if err != nil {
 		return nil, err
@@ -23,6 +23,7 @@ func (m *Headers) RequestClient() (*http.Response, error) {
 
 	req.Header.Add("Client-Id", m.ClientId)
 	req.Header.Add("Api-Key", m.ApiKey)
+	req.Header.Add("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resClient, err := client.Do(req)
