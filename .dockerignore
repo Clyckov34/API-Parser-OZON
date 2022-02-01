@@ -1,0 +1,5 @@
+*.json
+*.txt
+.gitignore
+
+bin
