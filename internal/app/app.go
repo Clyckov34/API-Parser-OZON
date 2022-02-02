@@ -32,7 +32,7 @@ func Run(fl *AppFlag) {
 	goods.ConvertData(*data)
 	dataGoods := goods.Goods()
 
-	//Вывод данныз в терминал
+	//Вывод данных в терминал
 	for k, v := range dataGoods {
 		fmt.Printf("%v) %v - %v - %v\n", k+1, v.Id, v.Name, v.Parents)
 	}
