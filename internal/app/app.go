@@ -29,6 +29,7 @@ func Run(fl *AppFlag) {
 		log.Fatalln(err)
 	}
 
+	//Конвертирование данные в определенную структуру
 	goods.ConvertData(*data)
 	dataGoods := goods.Goods()
 

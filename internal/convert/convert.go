@@ -38,6 +38,7 @@ func (m *Categories) ConvertData(data CategoryModel) {
 	title = nil //Обнуляет гатегории
 }
 
+//Goods выводит данные товара
 func (m *Categories) Goods() Categories {
 	return goods
 }
