@@ -1,4 +1,4 @@
 *.json
 *.txt
-
+.idea
 bin

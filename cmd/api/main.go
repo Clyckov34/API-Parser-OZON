@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"log"
-	"myapiproject/internal/api"
+	"myapiproject/internal/app"
 	"net/http"
 	"os"
 )
 
-var dataFlag api.AppFlag
+var dataFlag app.AppFlag
 
 func init() {
 	flag.StringVar(&dataFlag.HTTPHeader.ApiKey, "apiKey", "", "Данные Header Api-Key")
@@ -23,6 +23,6 @@ func main() {
 		log.Fatalln("ошибка: Не указаны флаги")
 	} else {
 		flag.Parse()
-		api.Run(&dataFlag)
+		app.Run(&dataFlag)
 	}
 }

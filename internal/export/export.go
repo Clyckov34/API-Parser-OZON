@@ -1,14 +1,15 @@
-package api
+package export
 
 import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"myapiproject/internal/convert"
 	"time"
 )
 
 //CreateJsonFile создание json файла
-func (m *HTTPHeader) CreateJsonFile(data Categories) error {
+func CreateJsonFile(data convert.Categories) error {
 	file, err := json.MarshalIndent(data, "", " ")
 	if err != nil {
 		return errors.New("ошибка: переобразование json")
