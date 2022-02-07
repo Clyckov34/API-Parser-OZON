@@ -1,5 +1,6 @@
 # TestTask
-Выгрузка товаров в json файл (ozon.json) из магазина OZON
+Выгрузка товаров в плоскую структуру в json файл из магазина OZON.
+Документация для получения API-ключ: https://docs.ozon.ru/api/seller/#tag/Auth
 
 ### 1. Параметры(Flag) приложения
 - `--apiKey` (string) Данные Header Api-Key
