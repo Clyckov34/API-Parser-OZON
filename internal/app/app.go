@@ -13,6 +13,7 @@ func Run(fl *AppFlag) {
 	var client = api.HTTPHeader{
 		ApiKey:      fl.HTTPHeader.ApiKey,
 		ClientId:    fl.HTTPHeader.ClientId,
+		ContentType: "application/json",
 		URL:         fl.HTTPHeader.URL,
 		Method:      fl.HTTPHeader.Method,
 		WithTimeout: 15 * time.Second,

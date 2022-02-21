@@ -6,6 +6,7 @@ import "time"
 type HTTPHeader struct {
 	ClientId    string
 	ApiKey      string
+	ContentType string
 	URL         string
 	Method      string
 	WithTimeout time.Duration

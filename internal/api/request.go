@@ -17,7 +17,7 @@ func (m *HTTPHeader) RequestClient() (*http.Response, error) {
 
 	req.Header.Add("Client-Id", m.ClientId)
 	req.Header.Add("Api-Key", m.ApiKey)
-	req.Header.Add("Content-Type", "application/json")
+	req.Header.Add("Content-Type", m.ContentType)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
