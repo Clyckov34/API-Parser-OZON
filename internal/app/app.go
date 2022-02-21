@@ -6,14 +6,16 @@ import (
 	"myapiproject/internal/api"
 	"myapiproject/internal/convert"
 	"myapiproject/internal/export"
+	"time"
 )
 
 func Run(fl *AppFlag) {
 	var client = api.HTTPHeader{
-		ApiKey:   fl.HTTPHeader.ApiKey,
-		ClientId: fl.HTTPHeader.ClientId,
-		URL:      fl.HTTPHeader.URL,
-		Method:   fl.HTTPHeader.Method,
+		ApiKey:      fl.HTTPHeader.ApiKey,
+		ClientId:    fl.HTTPHeader.ClientId,
+		URL:         fl.HTTPHeader.URL,
+		Method:      fl.HTTPHeader.Method,
+		WithTimeout: 15 * time.Second,
 	}
 
 	//Запрос в API
