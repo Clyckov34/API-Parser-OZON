@@ -7,7 +7,7 @@
 - `--clientId` (string) Данные Header Client-Id
 - `--method` (string) Метод запроса (default: "POST")
 - `--url` (string) URL API (default: "https://api-seller.ozon.ru/v2/category/tree")
-- `--expFile` (bool) Выгружает json файл товаров (default: false)
+- `--export` (bool) Выгружает json файл товаров (default: false)
 
 ### 2. App Docker build and run
 - Build: `sudo docker build -t ozon .`
