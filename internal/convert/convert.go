@@ -8,12 +8,12 @@ import (
 )
 
 var (
-	title []string //Хранит категории товара до уровня в котором есть товары
-	goods Categories
+	category []string //Хранит категории товара до уровня в котором есть товары
+	goods    Categories
 )
 
-//DecoderBodyJson парсинг из json в структуру
-func (m *Categories) DecoderBodyJson(response *http.Response) (*CategoryModel, error) {
+//SetDecoderBodyJson парсинг из json в структуру
+func (m *Categories) SetDecoderBodyJson(response *http.Response) (*CategoryModel, error) {
 	res, err := io.ReadAll(response.Body)
 	if err != nil {
 		return nil, errors.New("ошибка получения BODY: " + err.Error())
@@ -25,20 +25,20 @@ func (m *Categories) DecoderBodyJson(response *http.Response) (*CategoryModel, e
 	return &ctgMod, nil
 }
 
-//ConvertData конвертирование данных в плоскую структуру. ОБРАЗЕЦ 1
-func (m *Categories) ConvertData(data CategoryModel) {
+//SetConvert конвертирование данных в плоскую структуру. ОБРАЗЕЦ 1
+func (m *Categories) SetConvert(data CategoryModel) {
 	for _, v := range data.Result {
 		if len(v.Children) > 0 {
-			title = append(title, v.Name)
-			m.ConvertData(CategoryModel{Result: v.Children})
+			category = append(category, v.Name)
+			m.SetConvert(CategoryModel{Result: v.Children})
 		} else {
-			goods = append(goods, Category{Id: v.Id, Name: v.Name, Parents: title})
+			goods = append(goods, Category{Id: v.Id, Name: v.Name, Parents: category})
 		}
 	}
-	title = nil //Обнуляет гатегории
+	category = nil //Обнуляет гатегории
 }
 
-//Goods выводит данные товара
-func (m *Categories) Goods() Categories {
+//GetGoods получить данные товара
+func (m *Categories) GetGoods() Categories {
 	return goods
 }

@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-//CreateJsonFile создание json файла
-func CreateJsonFile(data convert.Categories) error {
+//GetJsonFile создание json файла
+func GetJsonFile(data convert.Categories) error {
 	file, err := json.MarshalIndent(data, "", " ")
 	if err != nil {
 		return errors.New("ошибка: переобразование json")

@@ -6,6 +6,6 @@ import (
 
 //AppFlag параметры запуска приложения
 type AppFlag struct {
-	ExpFile    bool
-	HTTPHeader api.HTTPHeader
+	ExportFile bool
+	API        api.API
 }

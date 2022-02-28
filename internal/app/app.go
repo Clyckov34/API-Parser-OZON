@@ -10,31 +10,31 @@ import (
 )
 
 func Run(fl *AppFlag) {
-	var client = api.HTTPHeader{
-		ApiKey:      fl.HTTPHeader.ApiKey,
-		ClientId:    fl.HTTPHeader.ClientId,
+	var client = api.API{
+		ApiKey:      fl.API.ApiKey,
+		ClientId:    fl.API.ClientId,
 		ContentType: "application/json",
-		URL:         fl.HTTPHeader.URL,
-		Method:      fl.HTTPHeader.Method,
+		URL:         fl.API.URL,
+		Method:      fl.API.Method,
 		WithTimeout: 15 * time.Second,
 	}
 
 	//Запрос в API
-	body, err := client.RequestClient()
+	body, err := client.GetRequest()
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	//Обработка полученных данных
 	var goods = convert.Categories{}
-	data, err := goods.DecoderBodyJson(body)
+	data, err := goods.SetDecoderBodyJson(body)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	//Конвертирование данные в определенную структуру
-	goods.ConvertData(*data)
-	dataGoods := goods.Goods()
+	goods.SetConvert(*data)
+	dataGoods := goods.GetGoods()
 
 	//Вывод данных в терминал
 	for k, v := range dataGoods {
@@ -42,8 +42,8 @@ func Run(fl *AppFlag) {
 	}
 
 	//Выгрузка данных
-	if fl.ExpFile {
-		if err := export.CreateJsonFile(dataGoods); err != nil {
+	if fl.ExportFile {
+		if err := export.GetJsonFile(dataGoods); err != nil {
 			log.Println(err)
 		}
 	}

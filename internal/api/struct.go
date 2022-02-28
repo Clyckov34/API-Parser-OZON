@@ -2,8 +2,8 @@ package api
 
 import "time"
 
-//Headers загаловок идентификация пользователя
-type HTTPHeader struct {
+//API загаловок идентификация пользователя
+type API struct {
 	ClientId    string
 	ApiKey      string
 	ContentType string

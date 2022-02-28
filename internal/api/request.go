@@ -6,13 +6,13 @@ import (
 	"net/http"
 )
 
-//clientHeader запрос с параметрами header
-func (m *HTTPHeader) RequestClient() (*http.Response, error) {
+//GetRequest получить запрос с сервера
+func (m *API) GetRequest() (*http.Response, error) {
 	ctx, _ := context.WithTimeout(context.Background(), m.WithTimeout)
 
 	req, err := http.NewRequestWithContext(ctx, m.Method, m.URL, nil)
 	if err != nil {
-		return nil, errors.New("ошибка запроса: " + err.Error())
+		return nil, errors.New("error: request server: " + err.Error())
 	}
 
 	req.Header.Add("Client-Id", m.ClientId)
@@ -21,7 +21,7 @@ func (m *HTTPHeader) RequestClient() (*http.Response, error) {
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return nil, errors.New("ошибка запроса от клиента: " + err.Error())
+		return nil, errors.New("error: request client: " + err.Error())
 	}
 
 	return res, nil
